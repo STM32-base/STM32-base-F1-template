@@ -1,4 +1,4 @@
-#include <stm32f1xx.h>
+#include "STM32F1xx.h"
 
 // Quick and dirty delay
 static void delay (unsigned int time) {
@@ -8,7 +8,7 @@ static void delay (unsigned int time) {
 
 int main (void) {
     // Turn on the GPIOC peripheral
-    RCC->APB2ENR  |= RCC_APB2ENR_IOPCEN;
+    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 
     // Put the pin in general purpose push-pull mode (B00)
     GPIOC->CRH &= ~(GPIO_CRH_CNF13);
