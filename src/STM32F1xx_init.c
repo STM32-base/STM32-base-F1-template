@@ -54,3 +54,26 @@ void SystemInit (void) {
   RCC->CIR = 0x009F0000U;
 #endif
 }
+
+// These symbols are provided by the linker
+extern void (*__preinit_array_start[])();
+extern void (*__preinit_array_end[])();
+extern void (*__init_array_start[])();
+extern void (*__init_array_end[])();
+
+/**
+ * Calls the functions in the preinit and init arrays. The start and end
+ * addresses of these arrays are provided by the linker.
+ *
+ * You can adapt this function to fit your needs, however, do not change its
+ * name! It is called in the startup code.
+ */
+void __main () {
+  for (void (**f)() = __preinit_array_start; f < __preinit_array_end; ++f) {
+    (*f)();
+  }
+
+  for (void (**f)() = __init_array_start; f < __init_array_end; ++f) {
+    (*f)();
+  }
+}

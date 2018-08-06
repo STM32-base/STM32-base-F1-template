@@ -26,4 +26,7 @@ int main (void) {
 
         delay(500);
     }
+
+    // Return 0 to satisfy compiler
+    return 0;
 }
